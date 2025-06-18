@@ -4,7 +4,10 @@
   "description": "Backend for the **HereNow** geo-locked attendance app. Built with **Express.js** and **TypeScript** to provide secure clock-in endpoints, location verification, and attendance record management.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +22,11 @@
   },
   "homepage": "https://github.com/alvianzf/HereNow-API#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.24",
     "ts-node": "^10.9.2",
