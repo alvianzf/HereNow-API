@@ -1,12 +1,17 @@
-import express from 'express';
-import pingRoutes from './routes/ping';
+import express from "express";
+import cors from "cors";
+import adminRoutes from "./routes/createUser";
+import authRoutes from "./routes/auth"; 
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
 app.use(express.json());
-app.use('/api', pingRoutes);
+
+app.use("/api/admin", adminRoutes);
+app.use("/api", authRoutes); 
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`API running at http://localhost:${port}`);
 });
