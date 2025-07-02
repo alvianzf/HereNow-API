@@ -28,7 +28,7 @@ router.post("/login", asyncHandler(async (req, res) => {
     return;
   }
 
-  // ✅ Jangan pakai `return` di sini
+  
   res.status(200).json({
     id: user.id,
     email: user.email,
