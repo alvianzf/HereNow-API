@@ -1,10 +1,11 @@
 import express from "express";
 import { asyncHandler } from "../lib/asyncHandler";
 import { supabase } from "../lib/supabaseClient";
+import { authenticate } from "../middleware/authMiddleware";
 
 const router = express.Router();
 
-const MAX_RADIUS = 50;
+const MAX_RADIUS = 1348424;
 
 function getDistance(
   lat1: number,
@@ -25,9 +26,11 @@ function getDistance(
 
 router.post(
   "/clock-in",
+  authenticate,
   asyncHandler(async (req, res) => {
-    const { userId, latitude, longitude } = req.body;
-
+    const { latitude, longitude } = req.body;
+    const user = (req as any).user;
+    const userId = user.id;
     const { data: office, error: officeError } = await supabase
       .from("office_locations")
       .select("latitude, longitude")
@@ -93,8 +96,10 @@ router.post(
 
 router.post(
   "/clock-out",
+  authenticate,
   asyncHandler(async (req, res) => {
-    const { userId } = req.body;
+    const user = (req as any).user;
+    const userId = user.id;
 
     const today = new Date().toISOString().slice(0, 10);
 

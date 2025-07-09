@@ -3,9 +3,11 @@ import cors from "cors";
 import adminRoutes from "./routes/createUser";
 import authRoutes from "./routes/auth";
 import attendanceRoutes from "./routes/attandance";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.use(cookieParser());
 
 app.use(cors());
 app.use(express.json());
